@@ -1,7 +1,23 @@
 const express = require('express')
 const app = express()
-var bodyParser = require('body-parser')
-var cors = require('cors')
+const bodyParser = require('body-parser')
+const cors = require('cors')
+const knex = require('knex');
+
+const postgres = knex({
+  client: 'pg',
+  connection: {
+    host : '127.0.0.1',
+    user : 'postgres',
+    password : '',
+    database : 'smart-brain'
+  }
+});
+
+postgres.select('*').from('users').then(data => {
+  console.log(data);
+  console.log('hi');
+});
 
 const database = {
   users: [{
